@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>temp_project</title>
+    <link rel="stylesheet" href="./src/index.css" />
+    <script type="module" src="/src/simple-form.ts"></script>
+    <script type="module" src="/src/simple-button.ts"></script>
+    <style>
+      :root {
+        /* Customer CI - Button Theme */
+        --simple-btn-bg: #e11d48; /* Rose-600 */
+        --simple-btn-hover-bg: #be123c; /* Rose-700 */
+        --simple-btn-active-bg: #9f1239; /* Rose-800 */
+        --simple-btn-radius: 9999px; /* Pill shape */
+        --simple-btn-padding: 0.75rem 1.5rem;
+      }
+
+      /* Structural overrides via Parts */
+      simple-form::part(container) {
+        border: 2px solid #e11d48;
+        border-radius: 12px;
+        padding: 2rem;
+        background-color: #fff1f2; /* Rose-50 */
+      }
+
+      simple-form::part(title) {
+        color: #881337; /* Rose-900 */
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      simple-form::part(input),
+      simple-form::part(textarea) {
+        border: 1px solid #fda4af;
+        border-radius: 8px;
+        padding: 0.5rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      simple-form::part(button) {
+        background-color: #881337;
+        color: white;
+        padding: 1rem;
+        width: 100%;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+        align-items: start;
+      "
+    >
+      <simple-form></simple-form>
+      <simple-button
+        label="Click me!"
+        @btn-click="${(e: CustomEvent) => console.log(e.detail)}"
+      ></simple-button>
+    </div>
+  </body>
+</html>
