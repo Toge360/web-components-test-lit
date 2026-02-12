@@ -3,32 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Svelte Web Component Demo</title>
+    <title>Vue 3 Web Component Demo</title>
   </head>
   <body>
-    <h1>Svelte Web Component Demo</h1>
+    <h1>Vue 3 Web Component Demo</h1>
 
     <div
       style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap"
     >
       <div>
         <h2>Button Component</h2>
-        <my-svelte-button text="Svelte Button" count="0"></my-svelte-button>
+        <!-- Note: Attributes are kebab-case -->
+        <my-vue-button text="Vue Button" count="0"></my-vue-button>
       </div>
 
       <div>
         <h2>Form Component</h2>
-        <my-base-form title="Sign Up Today"></my-base-form>
+        <my-base-form title="Vue Contact Form"></my-base-form>
       </div>
     </div>
 
+    <!-- Load the main entry point -->
     <script type="module" src="/src/main.ts"></script>
 
     <script>
+      // Use a slight delay to ensure elements are upgraded/available if script runs too fast
+      // though module scripts usually defer correctly.
+
       // Listen for custom events on button
-      const btn = document.querySelector("my-svelte-button");
+      const btn = document.querySelector("my-vue-button");
       if (btn) {
+        // Vue custom events are dispatched as native CustomEvents
         btn.addEventListener("click", (e) => {
+          // The payload is in e.detail[0] for Vue 3 custom elements by default
+          // Update: defineCustomElement wraps emits in CustomEvent where detail is the array of args
+          // So single arg emit('click', payload) -> e.detail[0] is payload
           console.log("Custom event received from Button:", e.detail);
         });
       }
@@ -37,10 +46,13 @@
       const form = document.querySelector("my-base-form");
       if (form) {
         form.addEventListener("form-submit", (e) => {
-          console.log("Custom event received from Form:", e.detail);
-          alert(
-            `Form Submitted!\nName: ${e.detail.name}\nEmail: ${e.detail.email}`,
-          );
+          // detail is an array of arguments passed to emit()
+          const data = e.detail[0];
+          console.log("Custom event received from Form:", data);
+
+          if (data) {
+            alert(`Form Submitted!\nName: ${data.name}\nEmail: ${data.email}`);
+          }
         });
       }
     </script>
