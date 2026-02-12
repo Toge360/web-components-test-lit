@@ -1,18 +1,31 @@
 {
-  "name": "temp_project",
-  "private": true,
-  "version": "0.0.0",
+  "name": "web-components-test-lit",
+  "version": "1.0.0",
   "type": "module",
+  "main": "index.js",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "lit": "^3.3.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toge360/web-components-test-lit.git"
   },
-  "devDependencies": {
-    "typescript": "~5.9.3",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Toge360/web-components-test-lit/issues"
+  },
+  "homepage": "https://github.com/Toge360/web-components-test-lit#readme",
+  "description": "",
+  "dependencies": {
+    "@sveltejs/vite-plugin-svelte": "^6.2.4",
+    "svelte": "^5.50.2",
+    "svelte-preprocess": "^6.0.3",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.3",
     "vite": "^7.3.1"
   }
 }
